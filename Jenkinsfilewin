@@ -1,0 +1,44 @@
+pipeline {
+
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('System Information') {
+            steps {
+                bat 'echo Current User: %USERNAME%'
+                bat 'echo Current Directory:'
+                bat 'cd'
+
+                bat 'echo Git Version:'
+                bat 'git --version'
+
+                bat 'echo Node Version:'
+                bat 'node -v'
+
+                bat 'echo NPM Version:'
+                bat 'npm -v'
+            }
+        }
+
+        stage('Repository Contents') {
+            steps {
+                bat 'dir'
+            }
+        }
+
+        stage('Success') {
+            steps {
+                bat 'echo Repository cloned successfully!'
+            }
+        }
+
+    }
+
+}
